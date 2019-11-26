@@ -1,0 +1,23 @@
+#!/usr/bin/env bash
+set -eu
+if [ ! -f ssl/key.pem ]; then
+   echo "Run ./prepare first"
+   exit 1
+fi
+
+CONTAINER=elk_nginx
+
+docker run --rm -d \
+       --network=elk \
+       --name=$CONTAINER \
+       --network-alias=nginx \
+       -p 80:80 \
+       -p 443:443 \
+       reside/proxy-nginx \
+       kibana:5601 logs.dide.ic.ac.uk 80 443
+
+docker cp ssl/key.pem $CONTAINER:/run/proxy/key.pem
+docker cp ssl/certificate.pem $CONTAINER:/run/proxy/certificate.pem
+
+echo "Cleaning up certificates"
+rm -rf ssl

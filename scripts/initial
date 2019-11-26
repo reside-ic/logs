@@ -1,0 +1,21 @@
+# This section needs to be done manually, and only needs doing after
+# the elasticsearch volume has been removed.
+
+# Start up elastic search and wait for it to stabilise (this is a
+# blocking command)
+docker-compose -f docker-elk/docker-compose.yml up elasticsearch
+
+# Reset all the passwords
+docker exec docker-elk_elasticsearch_1 \
+       bin/elasticsearch-setup-passwords auto --batch
+
+# Set these passwords in the vault
+vault write secret/logs/users/api_system password=<password>
+vault write secret/logs/users/kibana password=<password>
+vault write secret/logs/users/logstash_system password=<password>
+vault write secret/logs/users/beats_system password=<password>
+vault write secret/logs/users/remote_monitoring_user password=<password>
+vault write secret/logs/users/elastic password=<password>
+
+# Stop the elasticsearch container (ctrl-C)
+docker system prune -f

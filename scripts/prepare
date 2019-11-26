@@ -7,7 +7,7 @@ else
     git -C docker-elk pull
 fi
 
-export VAULT_ADDR=https://vault.dide.ic.ac.uk
+export VAULT_ADDR=https://vault.dide.ic.ac.uk:8200
 vault login -method=github
 ELASTIC_PASSWORD=$(vault read -field=value /secret/logs/elastic_password)
 

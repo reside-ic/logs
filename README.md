@@ -49,3 +49,5 @@ docker system prune -f
 ```
 
 The data volume will persist.
+
+After bringing up the system fully, log in with the elastic user and go to the [user management control](https://logs.dide.ic.ac.uk/app/kibana#/management/security/users) and add users and roles.

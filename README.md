@@ -1,5 +1,11 @@
 ## Log server
 
+The server is hosted at https://logs.dide.ic.ac.uk which is available only on the VPN.
+
+Access is restricted - email Rich if you can't get in and think you should be able to.  The super user is `elastic` and its password is in the vault as `secret/logs/users/elastic`
+
+### Deploying the server
+
 Log in to machine with
 
 ```
@@ -14,9 +20,11 @@ Bringing up the system, provided that the elastic search volume exists and conta
 ./scripts/proxy
 ```
 
+This will need serious work later I suspect.
+
 ### Initial prep work
 
-This section needs to be done manually, and only needs doing after the elasticsearch volume has been removed.
+This section needed to be done manually, and would only need doing again after the elasticsearch volume has been removed or lost.
 
 First start up elastic search and wait for it to stabilise (this is a blocking command)
 

@@ -8,7 +8,7 @@ fi
 CONTAINER=elk_nginx
 
 docker run --rm -d \
-       --network=elk \
+       --network=docker-elk_elk \
        --name=$CONTAINER \
        --network-alias=nginx \
        -p 80:80 \

@@ -22,6 +22,10 @@ Bringing up the system, provided that the elastic search volume exists and conta
 
 This will need serious work later I suspect.
 
+### Feeding logs into the server
+
+See [the beats setup repository](https://github.com/reside-ic/beats)
+
 ### Initial prep work
 
 This section needed to be done manually, and would only need doing again after the elasticsearch volume has been removed or lost.

@@ -17,18 +17,18 @@ LOGSTASH_PASSWORD=$(vault read -field=password /secret/logs/users/logstash_syste
 # find docker-elk -type f -print0 | \
 #     xargs -0 sed -i "s/changeme/$ELASTIC_PASSWORD/g"
 
-sed -i '/ELASTIC_PASSWORD/d' docker-elk/docker-compose.yml
+sed -i "/ELASTIC_PASSWORD/d" docker-elk/docker-compose.yml
 
-sed -i 's/username: elastic/username: kibana/g' \
+sed -i "s/username: elastic/username: kibana/g" \
     docker-elk/kibana/config/kibana.yml
-sed -i 's/password: changeme/password: $KIBANA_PASSWORD/g' \
+sed -i "s/password: changeme/password: $KIBANA_PASSWORD/g" \
     docker-elk/kibana/config/kibana.yml
 
-sed -i 's/username: elastic/username: logstash_system/g' \
+sed -i "s/username: elastic/username: logstash_system/g" \
     docker-elk/logstash/config/logstash.yml
-sed -i 's/password: changeme/password: $LOGSTASH_PASSWORD/g' \
+sed -i "s/password: changeme/password: $LOGSTASH_PASSWORD/g" \
     docker-elk/logstash/config/logstash.yml
-sed -i 's/changeme/$ELASTIC_PASSWORD/g' \
+sed -i "s/changeme/$ELASTIC_PASSWORD/g" \
     docker-elk/logstash/pipeline/logstash.conf
 
 mkdir -p ssl

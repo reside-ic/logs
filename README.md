@@ -20,6 +20,14 @@ Bringing up the system, provided that the elastic search volume exists and conta
 ./scripts/proxy
 ```
 
+It all takes a while to start up and one can use
+
+```
+./scripts/tail-logs
+```
+
+to get the logs of containers as they start up (all fantastically meta).  Quit this with Ctrl-C when things have stabilised and ignore the scary red "ABORTING" that is printed - the containers are unaffected.
+
 This will need serious work later I suspect.
 
 ### Feeding logs into the server

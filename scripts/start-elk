@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+set -ue
+export ELK_VERSION=7.4.2
+docker-compose -f docker-elk/docker-compose.yml up --detach

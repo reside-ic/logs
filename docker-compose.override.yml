@@ -1,0 +1,14 @@
+version: '3.2'
+services:
+  proxy:
+    image: reside/proxy-nginx
+    volumes:
+    - ../ssl/key.pem:/run/proxy/key.pem:ro
+    - ../ssl/certificate.pem:/run/proxy/certificate.pem:ro
+    ports:
+    - 80:80
+    - 443:443
+    networks:
+    - elk
+    command: kibana:5601 logs.dide.ic.ac.uk 80 443
+    restart: unless-stopped

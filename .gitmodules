@@ -1,0 +1,3 @@
+[submodule "docker-elk"]
+	path = docker-elk
+	url = https://github.com/reside-ic/docker-elk.git

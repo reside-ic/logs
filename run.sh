@@ -13,4 +13,4 @@ cd docker-elk
 [ "$(ls -A)" ] || git submodule update --init
 KIBANA_PASSWORD="$(vault read -field=password secret/logs/users/kibana_system)"
 export KIBANA_PASSWORD
-docker-compose -f docker-compose.yml -f ../docker-compose.override.yml up -d
+docker-compose -f docker-compose.yml -f ../docker-compose.override.yml up -d --build

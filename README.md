@@ -28,7 +28,7 @@ docker-compose down
 ## Run
 
 1. Log into Vault
-1. `./run.sh`
+1. `./logs up`
 1. Visit https://logs.dide.ic.ac.uk (VPN only) and log in as `elastic` with password above
 
 This can safely be repeated in order to update information from Vault e.g. passwords or certificates

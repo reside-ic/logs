@@ -24,8 +24,8 @@ case "${1-}" in
             KIBANA_PASSWORD="$(vault read -field=password secret/logs/users/kibana_system)"
             export KIBANA_PASSWORD
 
-            cd docker-elk
             git submodule update
+            cd docker-elk
             compose up -d --build
             ;;
         down)

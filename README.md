@@ -33,6 +33,12 @@ docker-compose down
 
 This can safely be repeated in order to update information from Vault e.g. passwords or certificates
 
+## Update
+
+1. `git pull`
+1. Log into Vault
+1. `./logs pull`
+
 ## Further information
 
 See the KB article on Logging

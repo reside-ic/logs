@@ -4,35 +4,37 @@ set -eEuo pipefail
 cd "$(dirname "${BASH_SOURCE[0]}")"
 
 function compose() {
-  docker-compose -f docker-compose.yml -f ../docker-compose.override.yml "$@"
+    docker-compose -f docker-compose.yml -f ../docker-compose.override.yml "$@"
 }
 
 case "${1-}" in
-        up)
-            export VAULT_ADDR=https://vault.dide.ic.ac.uk:8200
-            vault read -field=key secret/logs/ssl >ssl/key.pem
-            vault read -field=cert secret/logs/ssl >ssl/certificate.pem
+    up)
+        export VAULT_ADDR=https://vault.dide.ic.ac.uk:8200
+        vault read -field=key secret/logs/ssl >ssl/key.pem
+        vault read -field=cert secret/logs/ssl >ssl/certificate.pem
 
-            KIBANA_PASSWORD="$(vault read -field=password secret/logs/users/kibana_system)"
-            export KIBANA_PASSWORD
+        KIBANA_PASSWORD="$(vault read -field=password secret/logs/users/kibana_system)"
+        export KIBANA_PASSWORD
 
-            cd docker-elk
-            [ "$(ls -A)" ] || git submodule update --init
-            compose up -d
-            ;;
-        pull)
-            KIBANA_PASSWORD="$(vault read -field=password secret/logs/users/kibana_system)"
-            export KIBANA_PASSWORD
+        [ "$(ls -A)" ] || git submodule update --init
+        cd docker-elk
+        compose up -d
+        ;;
+    pull)
+        export VAULT_ADDR=https://vault.dide.ic.ac.uk:8200
 
-            git submodule update
-            cd docker-elk
-            compose up -d --build
-            ;;
-        down)
-            cd docker-elk
-            compose down
-            ;;
-        *)
-            echo $"Usage: $0 {up|pull|down}"
-            exit 1
+        KIBANA_PASSWORD="$(vault read -field=password secret/logs/users/kibana_system)"
+        export KIBANA_PASSWORD
+
+        git submodule update
+        cd docker-elk
+        compose up -d --build
+        ;;
+    down)
+        cd docker-elk
+        compose down
+        ;;
+    *)
+        echo $"Usage: $0 {up|pull|down}"
+        exit 1
 esac
